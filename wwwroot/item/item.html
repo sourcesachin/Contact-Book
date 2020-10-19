@@ -1,0 +1,81 @@
+﻿<div>
+    <a class="btn btn-default btn-rounded" href="#/">Home</a>
+    <button class="btn btn-info btn-rounded" ng-click="vm.editMode = !vm.editMode" ng-show="!vm.newContact">Edit contact</button>
+</div>
+<hr />
+<form class="form-horizontal" name="vm.contactForm" novalidate="novalidate">
+    <div class="form-group">
+        <label class="col-md-3 control-label" for="year">First Name</label>
+        <div class="col-md-6">
+            <input id="firstName" name="firstName" class="form-control" type="text"
+                   ng-readonly="!vm.editMode"
+                   ng-required="true"
+                   ng-model="vm.contact.firstName" placeholder="enter name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label" for="year">Last Name</label>
+        <div class="col-md-6">
+            <input id="lastName" name="lastName" class="form-control" type="text"
+                   ng-readonly="!vm.editMode"
+                   ng-required="true"
+                   ng-model="vm.contact.lastName" placeholder="enter surname">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label" for="year">Nick Name</label>
+        <div class="col-md-6">
+            <input id="NickName" name="NickName" class="form-control" type="text"
+                   ng-readonly="!vm.editMode"
+                   ng-model="vm.contact.NickName" placeholder="NickName">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label" for="year">DOB</label>
+        <div class="col-md-6">
+            <input id="DOB" name="DOB" class="form-control" type="date"
+                   ng-readonly="!vm.editMode"
+                   ng-model="vm.contact.DOB" placeholder="DOB">
+        </div>
+    </div>
+    <fieldset>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Address:</label>
+            <div class="col-md-6">
+                <ul>
+                    <li ng-repeat="address in vm.Addresses">
+                        {{address.line1}} |
+                        {{address.line2}} |
+                        {{address.country}} |
+                        {{address.postcode}}
+                        <button class="btn btn-default" ng-click="vm.deleteAddress(address)" ng-disabled="!vm.editMode">x</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group" ng-show="vm.editMode">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" name="Line1" class="form-control"
+                           ng-model="vm.line1" placeholder="add Line1">
+                    <input type="text" name="Line2" class="form-control"
+                           ng-model="vm.line2" placeholder="add Line2">
+                    <input type="text" name="Country" class="form-control"
+                           ng-model="vm.country" placeholder="add Country">
+                    <input type="text" name="Postcode" class="form-control"
+                           ng-model="vm.postcode" placeholder="add Postcode">
+                    <span class="input-group-btn" style="clear:both;display:block">
+                        <button class="btn btn-default" type="button" ng-click="vm.addAddress()">Add</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary btn-rounded" ng-click="vm.add()" ng-show="vm.editMode || vm.showTags">Save</button>
+        </div>
+    </div>
+</form>
